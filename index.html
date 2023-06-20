@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="subscribe()">Subscribe</button>
+
+    <script>
+        addEventListener('load', async (e) => {
+            // Registra um service worker no navegador que executa esse script abaixo;
+            let sw = await navigator.serviceWorker.register('sw.js')
+        })
+        async function subscribe() {
+            // Espera o service worker estar pronto;
+            let registration = await navigator.serviceWorker.ready;
+
+            // Uma vez pronto, ele se inscreve para receber notificações;
+            // - Utiliza a VAPID publica do servidor;
+            // - Retorna informações importantes do usuario, que devem ser guardadas pelo servidor;
+            let push = await registration.pushManager.subscribe({
+                userVisibleOnly: true,
+                applicationServerKey: 'BPlouQtghL4EQ9jKt4NGfjrJJNVm-gWYrDjnyDMPDJNO2eKok7bDMIOz4KKqpBsTCxIUpzXZl9j1XmqGfcqmXVU'
+            })
+
+            // Dados do navegador que eu tenho que enviar via push (no server)
+            console.log(push)
+        }
+
+
+    </script>
+
+</body>
+
+</html>
