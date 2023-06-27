@@ -3,5 +3,5 @@ self.addEventListener('push', (e) => {
 
     console.log('Evento: ' + e.data)
 
-    self.registration.showNotification(e.data.json().data, {});
+    self.registration.showNotification(e.data, {});
 });
