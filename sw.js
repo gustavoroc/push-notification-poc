@@ -1,7 +1,7 @@
 self.addEventListener('push', (e) => {
     // Evento de push notification em si.
 
-    console.log('Evento: ' + e.data)
+    console.log('Evento: ' + e.data.json())
 
-    self.registration.showNotification(e.data, {});
+    self.registration.showNotification(e.data.json(), {});
 });
